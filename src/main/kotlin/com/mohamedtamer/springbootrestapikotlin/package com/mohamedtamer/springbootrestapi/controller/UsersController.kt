@@ -1,9 +1,6 @@
 package com.mohamedtamer.springbootrestapikotlin.`package com`.mohamedtamer.springbootrestapi.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -20,8 +17,18 @@ class UsersController {
 
 
     // Path Parameters
-    @GetMapping("/users/{id}")
+    @GetMapping("/usersPath/{id}")
     fun helloPath(@PathVariable("id") uuid: String): String? {
         return "Hello!$uuid"
+    }
+
+    // Query Parameters
+    @GetMapping("/usersQuery/{id}")
+    fun helloQuery(
+        @PathVariable("id") uuid: String?,
+        @RequestParam name: String,
+        @RequestParam(required = false, defaultValue = "", name = "email") userEmail: String
+    ): String? {
+        return "Hello!" + name + "__" + userEmail
     }
 }
